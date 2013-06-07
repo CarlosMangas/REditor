@@ -1,0 +1,128 @@
+﻿<!--
+	REditor, an editor for rpg and adventure videogames.
+	Copyright (C) 2011 Carlos Garcia Mangas
+
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+	To contact the author: drake.ahener@gmail.com
+-->
+
+<Window x:Class="Interface.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="REditor" Height="1024" Width="1280" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.021*"/>
+            <RowDefinition Height="0.979*"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0"  Name="EditorMenu">
+            <MenuItem Name="MenuFile" Header="_File">
+                <MenuItem Name="NewProject" Header="_New project" Click="NewProject_Click"/>
+                <MenuItem Name="LaunchProject" Header="_Launch Project" Click="LaunchProject_Click"/>
+                <Separator/>
+                <MenuItem Name="MenuExit" Header="E_xit"/>
+            </MenuItem>
+            <MenuItem Name="MenuEdit" Header="_Edit">
+                <MenuItem Name="EditKeys" Header="Key input..." Click="EditKeys_Click" />
+                <MenuItem Name="EditScreens" Header="Screens..." Click="EditScreens_Click"/>
+            </MenuItem>
+            <MenuItem Name="MenuHelp" Header="_Help">
+                <MenuItem Name="About" Header="About..." Click="About_Click"/>
+            </MenuItem>
+        </Menu>
+        <TabControl Grid.Row="1" x:Name="TabHandler">
+            <TabItem x:Name="TabMain" Header="Main" FontSize="24">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.15*"/>
+                        <ColumnDefinition Width="0.45*"/>
+                        <ColumnDefinition Width="0.40*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox Grid.Column="0" x:Name="MainList" Height="265" VerticalAlignment="Top" Background="#FF929292" SelectionChanged="MainList_SelectionChanged">
+                        <ListBoxItem Content="Abilities"  />
+                        <ListBoxItem Content="Character" IsSelected="False" />
+                        <ListBoxItem Content="Consumables" />
+                        <ListBoxItem Content="Doors &amp; Keys" />
+                        <ListBoxItem Content="Enemies" />
+                        <ListBoxItem Content="NPCs" />
+                        <ListBoxItem Content="Walls" />
+                        <ListBoxItem Content="Weapons" />
+                    </ListBox>
+                    <ListBox Grid.Column="1" x:Name="ChildList" Background="#FFBDBDBD" SelectionChanged="ChildList_SelectionChanged" />
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.3*"/>
+                            <RowDefinition Height="0.6*"/>
+                            <RowDefinition Height="0.1*"/>
+                        </Grid.RowDefinitions>
+                        <Label Name="LabelPreviewInfo" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="250" Height="250" Background="Magenta" MaxWidth="250" MaxHeight="250" />
+                        <Label Grid.Row="1" Content="General Info:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0"/>
+                        <TextBox Name="GeneralInfoTextBox"  Grid.Row="1" Margin="15,40, 10, 15" BorderBrush="Black" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility ="Auto" IsReadOnly="True" TextWrapping="NoWrap" />
+                        <Button Grid.Row="2" Name="EditButton" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15,0,0,0" Content="Edit" IsEnabled="True" Click="EditButton_Click" ToolTip="Edit the selected element." />
+                        <Button Grid.Row="2" Name="AddButton" Width="100" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,125,0" Content="Add" Click="AddButton_Click" ToolTip="Add an element of the selected category." />
+                        <Button Grid.Row="2" Name="DeleteButton" Width="100" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,15,0" Content="Delete" IsEnabled="True" Click="DeleteButton_Click" ToolTip="Delete the selected element." />
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="TabStage" Header="Stages" FontSize="24">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.33*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.6*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="0.6*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="ButtonUpStage" Grid.Row="0" Grid.Column="1" Margin="0" VerticalAlignment="Center" Content="+" HorizontalAlignment="Center" Width="50" Height="50" Click="ButtonUpStage_Click" />
+                        <Button x:Name="ButtonLeftStage" Grid.Row="1" Grid.Column="0" Margin="0" VerticalAlignment="Center" Content="+" HorizontalAlignment="Center" Width="50" Height="50" Click="ButtonLeftStage_Click" />
+                        <Button x:Name="ButtonDownStage" Grid.Row="2" Grid.Column="1" Margin="0" Content="+" VerticalAlignment="Center" HorizontalAlignment="Center" Width="50" Height="50" Click="ButtonDownStage_Click" />
+                        <Button x:Name="ButtonRightStage" Grid.Row="1" Grid.Column="2" Margin="0" Content="+" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Click="ButtonRightStage_Click" />
+                        <Button x:Name="ButtonModifyStage" Grid.Row="2" Grid.Column="2" Margin="0" Content="Create" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Click="ButtonModifyStage_Click" ToolTip="Create the first stage. Modify the stage." />
+                        <Canvas x:Name="CanvasGame" Grid.Row="1" Grid.Column="1" Background="Black" HorizontalAlignment="Center" Width="640" Height="380" Margin="0" VerticalAlignment="Center" MaxHeight="380" MaxWidth="640" MouseLeftButtonDown="CanvasGame_MouseLeftButtonDown" MouseRightButtonDown="CanvasGame_MouseRightButtonDown"/>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>                            
+                            <RowDefinition Height="0.300*"/>
+                            <RowDefinition Height="0.255*"/>
+                            <RowDefinition Height="0.345*"/>
+                            <RowDefinition Height="0.100*"/>
+                        </Grid.RowDefinitions>
+                        <ListBox Grid.Row="1" x:Name="ListCategories" Background="#FF929292" SelectionChanged="ListCategories_SelectionChanged">
+                            <ListBoxItem Content="Character" />
+                            <ListBoxItem Content="Consumables" />
+                            <ListBoxItem Content="Doors &amp; Keys" />
+                            <ListBoxItem Content="Enemies" />
+                            <ListBoxItem Content="NPCs" />
+                            <ListBoxItem Content="Walls" />
+                            <ListBoxItem Content="Weapons" />
+                        </ListBox>
+                        <ListBox x:Name="ListItems" Grid.Row="2" Background="#FFBDBDBD" SelectionChanged="ListItems_SelectionChanged" />
+                        <Label Content="Selected Item" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0"/>
+                        <Label Name="LabelSetInfo" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="200" Background="Magenta" Margin="0,15,0,0" MaxWidth="200" MaxHeight="200" />
+                        <Button Name="EraserButton" Grid.Row="3" FontSize="20" Height="45" Width="75" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Eraser" Click="EraserButton_Click" ToolTip="Tool to erase any element from the stage." />
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

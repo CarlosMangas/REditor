@@ -1,0 +1,91 @@
+﻿<!--
+	REditor, an editor for rpg and adventure videogames.
+	Copyright (C) 2011 Carlos Garcia Mangas
+
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+	To contact the author: drake.ahener@gmail.com
+-->
+
+<Window x:Class="Interface.View.WeaponWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:extToolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
+        Title="Weapon" Height="640" Width="950" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+<Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.10*" />
+            <RowDefinition Height="0.37*" />
+            <RowDefinition Height="0.37*" />
+            <RowDefinition Height="0.14*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.35*"/>
+                <ColumnDefinition Width="0.22*"/>
+                <ColumnDefinition Width="0.15*"/>
+                <ColumnDefinition Width="0.28*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="WeaponNameLabel" Grid.Column="0" Content="Name:" FontSize="21.333" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBox x:Name="WeaponNameTextBox" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Width="245" Margin="70,0,0,0" TextChanged="WeaponNameTextBox_TextChanged" ToolTip="Name of the weapon.">
+                <TextBox.BorderBrush>
+                    <LinearGradientBrush EndPoint="0,20" StartPoint="0,0" MappingMode="Absolute">
+                        <GradientStop Color="#FFABADB3" Offset="0.05"/>
+                        <GradientStop Color="#FFE2E3EA" Offset="0.07"/>
+                        <GradientStop Color="Black" Offset="1"/>
+                    </LinearGradientBrush>
+                </TextBox.BorderBrush>
+            </TextBox>
+            <Label x:Name="WeaponType" Grid.Column="1" FontSize="21.333" Content="Type:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <ComboBox Name="TypeComboBox" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" Width="140" SelectionChanged="TypeComboBox_SelectionChanged" ToolTip="Type of the weapon.">
+                <ComboBoxItem Content="melee" />
+                <ComboBoxItem Content="distance" />
+            </ComboBox>
+            <Label x:Name="WeaponDamage" Grid.Column="2" FontSize="21.333" Content="Damage:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <extToolkit:IntegerUpDown Name="EffectValue" IsEditable="True" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" Value="0" Increment="1" Minimum="0" Maximum="99" ValueChanged="DamageValue_ValueChanged" ToolTip="Amount of damage the weapon will do." />
+            <Label x:Name="WeaponSpeed" Grid.Column="3" FontSize="21.333" Content="Speed:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <ComboBox Name="SpeedComboBox" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,95,0" Width="85" SelectionChanged="SpeedComboBox_SelectionChanged" ToolTip="The speed for the weapon.">
+                <ComboBoxItem Content="slow" />
+                <ComboBoxItem Content="normal" />
+                <ComboBoxItem Content="fast" />
+            </ComboBox>
+        </Grid>
+        <Label Grid.Row="1" Name="WeaponImageLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Height="125" Width="125" Margin="0,0,0,50" Background="Magenta" MaxHeight="125" MaxWidth="125" />
+        <Button Grid.Row="1" Name="WeaponImageButton" Content="Weapon Image" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10" Width="125" Height="45" Click="WeaponImageButton_Click" ToolTip="Main image for the weapon." />
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.25*"/>
+                <ColumnDefinition Width="0.25*"/>
+                <ColumnDefinition Width="0.25*"/>
+                <ColumnDefinition Width="0.25*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Name="WeaponArrowUpLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Height="125" Width="125" Margin="0,0,0,50" Background="Magenta" MaxWidth="125" MaxHeight="125" />
+            <Button Grid.Column="0" Name="WeaponArrowUpButton" Content="Image Bullet Up" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10" Width="125" Height="45" IsEnabled="False" Click="WeaponArrowUpButton_Click" ToolTip="Image for the bullet while firing up." />
+            <Label Grid.Column="1" Name="WeaponArrowDownLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Height="125" Width="125" Margin="0,0,0,50" Background="Magenta" MaxHeight="125" MaxWidth="125" />
+            <Button Grid.Column="1" Name="WeaponArrowDownButton" Content="Image Bullet Down" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10" Width="125" Height="45" IsEnabled="False" Click="WeaponArrowDownButton_Click" ToolTip="Image for the bullet while firing down." />
+            <Label Grid.Column="2" Name="WeaponArrowLeftLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Height="125" Width="125" Margin="0,0,0,50" Background="Magenta" MaxHeight="125" MaxWidth="125" />
+            <Button Grid.Column="2" Name="WeaponArrowLeftButton" Content="Image Bullet Left" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10" Width="125" Height="45" IsEnabled="False" Click="WeaponArrowLeftButton_Click" ToolTip="Image for the bullet while firing left." />
+            <Label Grid.Column="3" Name="WeaponArrowRightLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Height="125" Width="125" Margin="0,0,0,50" Background="Magenta" MaxHeight="125" MaxWidth="125" />
+            <Button Grid.Column="3" Name="WeaponArrowRightButton" Content="Image Bullet Right" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10" Width="125" Height="45" IsEnabled="False" Click="WeaponArrowRightButton_Click" ToolTip="Image for the bullet while firing right." />
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.73*"/>
+                <ColumnDefinition Width="0.27*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1" Name="AcceptWeapon" Content="Accept" Margin="10, 0 ,0 ,5" Width="110" Height="35" HorizontalAlignment="Left" VerticalAlignment="Bottom" IsEnabled="True" IsDefault="True" Click="AcceptWeapon_Click" />
+            <Button Grid.Column="1" Name="CancelWeapon" Content="Cancel" Margin="0, 0 ,10 ,5" Width="110" Height="35" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsCancel="True" Click="CancelWeapon_Click" />
+        </Grid>
+    </Grid>
+</Window>
