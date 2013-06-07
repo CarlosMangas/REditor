@@ -212,9 +212,7 @@ namespace Analyzer
             this.sourceFolder = sourceFolder;
             this.destFolder = destFolder;
 
-            string completeSourcePath = sourceFolder + "\\Template\\Template";
-
-            if (String.IsNullOrEmpty(SearchForWindowCS(completeSourcePath)))
+            if (String.IsNullOrEmpty(SearchForWindowCS(sourceFolder)))
             {
                 throw new InvalidDataException();
             }
@@ -222,9 +220,7 @@ namespace Analyzer
             //se supone que es source folder
             CopyFolder(sourceFolder, destFolder);
 
-            string completeDestPath = destFolder + "\\Template\\Template";
-
-            fileNameCS = SearchForWindowCS(completeDestPath);
+            fileNameCS = SearchForWindowCS(destFolder);
 
             doc = new XmlDocument();
             doc.Load(gameCode);
